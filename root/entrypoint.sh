@@ -25,4 +25,10 @@ if [ "$1" = "migrate" ];then
     exec su -c "bin/console doctrine:migrations:migrate --env=prod --no-interaction" -s /bin/sh nobody
 fi
 
+if [ "$1" = "dedupe" ];then
+    provisioner
+    cd /var/www/wallabag/
+    exec su -c "bin/console wallabag:clean-duplicates --env=prod --no-interaction" -s /bin/sh nobody
+fi
+
 exec "$@"
